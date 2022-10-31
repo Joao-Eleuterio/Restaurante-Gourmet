@@ -1,7 +1,9 @@
 import java.rmi.*;
 import java.rmi.server.*;
-
 import java.io.*;
+import java.io.File;
+import java.io.IOException;
+
 
 public class AddServerImpl extends UnicastRemoteObject
   implements AddServerIntf {
@@ -18,7 +20,7 @@ public class AddServerImpl extends UnicastRemoteObject
     }else{horario=1;}
      
        int i=0;
-       FileReader fr = new FileReader("reservas.txt");
+       FileReader fr = new FileReader("reserva.txt");
        BufferedReader reader = new BufferedReader(fr);
        String st = null;
        
@@ -30,7 +32,7 @@ public class AddServerImpl extends UnicastRemoteObject
                 lista[Integer.parseInt(st_split[2])][horario]=1;
             }
         }
-    
+    reader.close();
     for(i=0;i<25;i++){
       System.out.print(lista[i][0]);
     }
@@ -56,16 +58,18 @@ public class AddServerImpl extends UnicastRemoteObject
         } 
       }
     }
+   
     }catch(Exception c){
     System.out.println(c);
     }
+    
     return 0;
   }
   private void EscreveReserva(int mesa,int horario,String data)throws RemoteException{
-      try(FileWriter fw = new FileWriter("reservas.txt", true);
+      try(FileWriter fw = new FileWriter("reserva.txt", true);
     BufferedWriter bw = new BufferedWriter(fw);
     PrintWriter out = new PrintWriter(bw))
-{
+  {
   if(firstin){
     out.println();
     firstin=false;
@@ -80,7 +84,7 @@ public class AddServerImpl extends UnicastRemoteObject
   public double Cancelarmesa(String dia, String _horario) throws RemoteException{
     //Ver se existe a reserva        | ver se é o id correspondente
     try{
-      File inputFile = new File("reservas.txt");
+      File inputFile = new File("reserva.txt");
       File tempFile = new File("myTempFile.txt");
 
       BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -98,7 +102,6 @@ public class AddServerImpl extends UnicastRemoteObject
       }
       writer.close(); 
       reader.close(); 
-      boolean successful = tempFile.renameTo(inputFile);
       System.out.println("Mesa cancelada!");
     }catch(Exception c){
       System.out.println(c);
@@ -109,7 +112,7 @@ public class AddServerImpl extends UnicastRemoteObject
 
   String lista_mesas="";
   try{
-      FileReader fr = new FileReader("reservas.txt");
+      FileReader fr = new FileReader("reserva.txt");
        BufferedReader reader = new BufferedReader(fr);
        String st = null;
        
@@ -131,14 +134,49 @@ public class AddServerImpl extends UnicastRemoteObject
               lista_mesas+= "mesa "+(i+1)+": livre de noite\n";
             }
         }
+        reader.close();
         }catch(Exception c){
         System.out.println(c);
         }
       return lista_mesas;}
-  public double RegistarUtilizador(double d1, double d2) throws RemoteException{
+  public double RegistarUtilizador(String email, String password) throws RemoteException{
     //registar o utilizador que dados vamos pedir? 
-    return 0.0;}
+      
+		try {
+      String ultimo = "";
+			FileReader fr = new FileReader("reserva.txt");
+      BufferedReader reader = new BufferedReader(fr);
+			String line = "";
 
+			while (line != null) {
+				line = reader.readLine();
+				if (line != null) {
+					ultimo = line;
+				}
+			}
+      
+      int idUltimoUtilizador=1;
+      if(!ultimo.equals("")){
+         idUltimoUtilizador=(Integer.parseInt(ultimo.split("|")[0]+1));
+      }
+      
+      FileWriter fw = new FileWriter("utilizador.txt", true);
+      BufferedWriter bw = new BufferedWriter(fw); 
+      PrintWriter out = new PrintWriter(bw);
+      
+      out.println();
+      out.println(idUltimoUtilizador+"|"+email+"|"+password);
+      
+      System.out.println("Escreveu no ficheiro!!!! "+idUltimoUtilizador+"|"+email+"|"+password);
+      out.close();
+      reader.close();
+      }catch(IOException c){
+        c.printStackTrace();
+      }
+    
+   
+    return 0.0;
+  }
 }
 
 
