@@ -1,5 +1,6 @@
 import java.rmi.*;
 import java.io.*;
+
 public class AddServer {
   public static void main(String args[]) {
     try {

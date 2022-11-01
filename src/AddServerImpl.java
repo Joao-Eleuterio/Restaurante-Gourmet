@@ -1,15 +1,11 @@
 import java.rmi.*;
 import java.rmi.server.*;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 import java.io.*;
-import java.io.File;
-import java.io.IOException;
 
-public class AddServerImpl extends UnicastRemoteObject
-    implements AddServerIntf {
+public class AddServerImpl extends UnicastRemoteObject implements AddServerIntf {
 
   int idUtilizador;
   String nomeUtilizador;

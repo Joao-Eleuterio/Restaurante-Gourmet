@@ -1,0 +1,4 @@
+enum Horario {
+    ALMOCO,
+    JANTAR
+}

@@ -2,7 +2,6 @@ import java.rmi.*;
 import java.util.Scanner;
 
 public class AddClient {
- 
   public static void main(String args[]) {
     try {
       String addServerURL = "rmi://" + args[0] + "/AddServer";
@@ -115,11 +114,8 @@ public class AddClient {
           case 0:
             System.exit(0);
         }
-
       } while (true);
-    } catch (
-
-    Exception e) {
+    } catch (Exception e) {
       System.out.println("Exception: " + e);
     }
   }

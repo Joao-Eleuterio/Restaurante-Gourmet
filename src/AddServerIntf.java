@@ -5,5 +5,4 @@ public interface AddServerIntf extends Remote {
   String Listarmesas(String d1) throws RemoteException;
   boolean RegistarUtilizador(String d0, String d1, String d2) throws RemoteException;
   boolean login(String d1,String d2) throws RemoteException;
-
 }
