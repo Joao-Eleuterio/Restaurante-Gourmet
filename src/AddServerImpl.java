@@ -14,7 +14,7 @@ public class AddServerImpl extends UnicastRemoteObject implements AddServerIntf 
   AddServerImpl() throws RemoteException {
   }
 
-  public int Reservarmesa(String dia, String _horario, int qntpessoas) throws RemoteException {
+  public int Reservarmesa(String dia, String horarioParam, int qntpessoas) throws RemoteException {
     // validar os parametros ex: a data tar certa com os "/" e se a data é
     // realistica tipo para não ser 20/20/10
     // Queres fazer com que so consiga reservar uma vez por cada horario? tipo so
@@ -24,10 +24,10 @@ public class AddServerImpl extends UnicastRemoteObject implements AddServerIntf 
       int[][] lista = new int[25][2];
 
       //Mudar o horario para int  dia=0, noite=1 se nao da invalido e da return
-      _horario = _horario.toLowerCase();
-      if (_horario.equals("dia")) {
+      horarioParam = horarioParam.toLowerCase();
+      if (horarioParam.equals("dia")) {
         horario = 0;
-      } else if (_horario.equals("noite")) {
+      } else if (horarioParam.equals("noite")) {
         horario = 1;
       } else {
         System.out.println("Horario invalido");
