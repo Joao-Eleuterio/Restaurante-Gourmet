@@ -1,3 +1,0 @@
-1|joao|ola@gmail.com|ola123
-2|olaola|ola@gmail.com|ola
-3|ola|olaa@gmail.com|ola
