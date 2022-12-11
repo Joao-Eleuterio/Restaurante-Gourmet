@@ -1,7 +1,13 @@
 import java.rmi.*;
+import java.util.ArrayList;
 import java.io.*;
 
 public class RestauranteServer {
+	public static ArrayList<Reserva> reservasList = new ArrayList<>();
+	public static ArrayList<Mesa> mesasList = new ArrayList<>();
+	public static File reservasDB = new File("database", "reservas.txt");
+	public static File mesasDB = new File("database", "mesas.txt");
+	
 	public static void main(String args[]) {
 		try {
 			RestauranteServerImpl restauranteServerImpl = new RestauranteServerImpl();
@@ -9,20 +15,25 @@ public class RestauranteServer {
 
 			/* Criar a base de dados de reservas assim que o servidor abrir, se
 			esta não existir */
-			File reservasDB = new File("reservas.txt");
+			System.out.println("ola");	
       		if (reservasDB.createNewFile()) {
         		System.out.println("File created: " + reservasDB.getName());
       		} else {
-        		System.out.println("File already exists.");    
+				reservasList = Reserva.loadDB(reservasDB);
+				System.out.println("Database loaded: "+ reservasDB.getName());	
       		}
-			File utilizadoresDB = new File("utilizador.txt");
-			if (utilizadoresDB.createNewFile()) {
-				System.out.println("File created: " + utilizadoresDB.getName());
-			} else {
-				System.out.println("File already exists.");    
-			}
+
+			/* Criar a base de dados de reservas assim que o servidor abrir, se
+			esta não existir */
+      		if (mesasDB.createNewFile()) {
+        		System.out.println("File created: " + mesasDB.getName());
+      		} else {
+				mesasList = Mesa.loadDB(mesasDB);
+				System.out.println("Database loaded: "+ mesasDB.getName());
+      		}
 		} catch (Exception e) {
-			System.out.println("Server failed:" + e.getMessage());
+			System.out.println("Server failed: " + e.getMessage());
+			return;
 		}
 	}
 }

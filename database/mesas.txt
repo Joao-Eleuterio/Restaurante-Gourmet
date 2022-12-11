@@ -1,25 +1,25 @@
-1@2@Mesa 1
-2@2@Mesa 2
-3@2@Mesa 3
-4@2@Mesa 4
-5@2@Mesa 5
-6@2@Mesa 6
-7@2@Mesa 7
-8@2@Mesa 8
-9@2@Mesa 9
-10@2@Mesa 10
-11@4@Mesa 11
-12@4@Mesa 12
-13@4@Mesa 13
-14@4@Mesa 14
-15@4@Mesa 15
-16@8@Mesa 16
-17@8@Mesa 17
-18@8@Mesa 18
-19@8@Mesa 19
-20@8@Mesa 20
-21@12@Mesa 21
-22@12@Mesa 22
-23@12@Mesa 23
-24@12@Mesa 24
-25@12@Mesa 25
+1 : 2 : Mesa 1
+2 : 2 : Mesa 2
+3 : 2 : Mesa 3
+4 : 2 : Mesa 4
+5 : 2 : Mesa 5
+6 : 2 : Mesa 6
+7 : 2 : Mesa 7
+8 : 2 : Mesa 8
+9 : 2 : Mesa 9
+10 : 2 : Mesa 10
+11 : 4 : Mesa 11
+12 : 4 : Mesa 12
+13 : 4 : Mesa 13
+14 : 4 : Mesa 14
+15 : 4 : Mesa 15
+16 : 8 : Mesa 16
+17 : 8 : Mesa 17
+18 : 8 : Mesa 18
+19 : 8 : Mesa 19
+20 : 8 : Mesa 20
+21 : 12 : Mesa 21
+22 : 12 : Mesa 22
+23 : 12 : Mesa 23
+24 : 12 : Mesa 24
+25 : 12 : Mesa 25

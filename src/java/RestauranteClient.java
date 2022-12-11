@@ -34,12 +34,7 @@ public class RestauranteClient {
             Scanner qntpessoasS = new Scanner(System.in);
             int qntpessoas = qntpessoasS.nextInt();
 
-            if (restauranteInterface.Reservarmesa(dia, hora, qntpessoas) == 1) {
-              System.out.println("Conseguiu reservar mesa para " + qntpessoas + " no dia " + dia);
-            } else {
-              System.out.println("Não conseguiu reservar!");
-            }
-
+            System.out.println(restauranteInterface.reservarMesa(dia, hora, qntpessoas));
             break;
           }
           case 2: {
@@ -51,7 +46,7 @@ public class RestauranteClient {
             Scanner horaS = new Scanner(System.in);
             String hora = horaS.nextLine();
 
-            restauranteInterface.Cancelarmesa(dia, hora);
+            restauranteInterface.cancelarMesa(dia, hora);
             break;
           }
           case 3: {
@@ -59,7 +54,7 @@ public class RestauranteClient {
             Scanner diaS = new Scanner(System.in);
             String dia = diaS.nextLine();
 
-            System.out.println(restauranteInterface.Listarmesas(dia));
+            System.out.println(restauranteInterface.listarMesas(dia));
             break;
           }
 
