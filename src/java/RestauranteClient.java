@@ -46,7 +46,7 @@ public class RestauranteClient {
             Scanner horaS = new Scanner(System.in);
             String hora = horaS.nextLine();
 
-            restauranteInterface.cancelarMesa(dia, hora);
+            restauranteInterface.cancelarMesa(dia, hora, 11);
             break;
           }
           case 3: {

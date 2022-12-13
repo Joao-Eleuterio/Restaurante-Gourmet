@@ -13,6 +13,10 @@ public class RestauranteServerImpl extends UnicastRemoteObject implements Restau
 
 	public String reservarMesa(String data, String horario, int nrPessoas) throws RemoteException {
 		Horario horarioConverted = Horario.convertToHorario(horario);
+		if(horarioConverted == null) {
+			return "Horario inválido, por favor insira almoço/jantar";
+		}
+
 		Reserva reserva = new Reserva(data, horarioConverted, nrPessoas);
 
 		for(int i = 0; i < RestauranteServer.mesasList.size(); i++) {
@@ -24,13 +28,17 @@ public class RestauranteServerImpl extends UnicastRemoteObject implements Restau
 		return "Não foi possivel realizar reserva para o horário escolhido!";
 	}
 
-	public String cancelarMesa(String data, String horario) throws Exception {
+	public String cancelarMesa(String data, String horario, int idMesa) throws Exception {
 		Horario horarioConverted = Horario.convertToHorario(horario);
+		if(horarioConverted == null) {
+			return "Horario inválido, por favor insira almoço/jantar";
+		}
 
 		for(int i = 0; i < RestauranteServer.mesasList.size(); i++) {
 			for(int j = 0; j < RestauranteServer.mesasList.get(i).getReservas().size(); j++) {
 				if(RestauranteServer.mesasList.get(i).getReservas().get(j).getData() == data &&
-				RestauranteServer.mesasList.get(i).getReservas().get(j).getHorario() == horarioConverted) {
+				RestauranteServer.mesasList.get(i).getReservas().get(j).getHorario() == horarioConverted &&
+				RestauranteServer.mesasList.get(i).getReservas().get(j).mesaAlocada() == idMesa) {
 					return RestauranteServer.mesasList.get(i).apagarReserva(RestauranteServer.mesasList.get(i).getReservas().get(j));
 				}
 			}

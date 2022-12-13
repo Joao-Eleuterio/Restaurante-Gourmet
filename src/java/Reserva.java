@@ -69,6 +69,10 @@ public class Reserva {
             writer.write(currentLine + System.getProperty("line.separator"));
         }
         
+        tempFile.renameTo(RestauranteServer.reservasDB);
+        RestauranteServer.reservasDB = tempFile;
+        reader.close();
+        writer.close();
     }
 
     public String alocarMesa(Mesa mesa) {

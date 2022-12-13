@@ -19,7 +19,7 @@ enum Horario {
             case "jantar":
                 return Horario.JANTAR;
             default:
-                throw new IllegalArgumentException("Database field horario was incorrect!");
+                return null;
         }
     }
 

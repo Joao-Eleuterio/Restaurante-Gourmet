@@ -15,7 +15,6 @@ public class RestauranteServer {
 
 			/* Criar a base de dados de reservas assim que o servidor abrir, se
 			esta não existir */
-			System.out.println("ola");	
       		if (reservasDB.createNewFile()) {
         		System.out.println("File created: " + reservasDB.getName());
       		} else {
