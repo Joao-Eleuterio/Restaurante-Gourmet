@@ -16,6 +16,8 @@ enum Horario {
         switch(horario) {
             case "almoco":
                 return Horario.ALMOCO;
+            case "almoço":
+                return Horario.ALMOCO;
             case "jantar":
                 return Horario.JANTAR;
             default:

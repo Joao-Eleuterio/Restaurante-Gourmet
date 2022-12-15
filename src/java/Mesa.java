@@ -9,7 +9,8 @@ public class Mesa {
     private String nome;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
-    public Mesa(int id, int capacidade, String nome) {
+    public Mesa(int id, int capacidade, String nome
+    ) {
         this.id = id;
         this.capacidade = capacidade;
         this.nome = nome;
@@ -66,8 +67,6 @@ public class Mesa {
 
             mesasList.add(new Mesa(Integer.parseInt(dataStrings[0]), Integer.parseInt(dataStrings[1]), dataStrings[2]));
         }
-
-        // Preenche a lista de reservas de cada mesa
         for(int i = 0; i < mesasList.size(); i++){
             for(int j = 0; j < RestauranteServer.reservasList.size(); j++){
                 if(mesasList.get(i).getId() == RestauranteServer.reservasList.get(j).mesaAlocada()){
@@ -75,7 +74,6 @@ public class Mesa {
                 }
             }
         }
-
         scanner.close();
         return mesasList;
     }

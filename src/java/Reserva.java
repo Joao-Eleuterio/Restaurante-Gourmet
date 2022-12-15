@@ -1,5 +1,4 @@
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,18 +7,21 @@ public class Reserva {
     private Horario horario;
     private int nrPessoas;
     private int idMesa;
-    
-    public Reserva(String data, Horario horario, int nrPessoas) {
+    private int idUtilizador;
+
+    public Reserva(String data, Horario horario, int nrPessoas, int idUtilizador) {
         this.data = data;
         this.horario = horario;
         this.nrPessoas = nrPessoas;
+        this.idUtilizador=idUtilizador;
     }
 
-    public Reserva(String data, Horario horario, int nrPessoas, int idMesa) {
+    public Reserva(String data, Horario horario, int nrPessoas, int idMesa,int idUtilizador) {
         this.data = data;
         this.horario = horario;
         this.nrPessoas = nrPessoas;
         this.idMesa = idMesa;
+        this.idUtilizador=idUtilizador;
     }
 
     public int mesaAlocada() {
@@ -38,6 +40,9 @@ public class Reserva {
         return this.data;
     }
 
+    public int getIdUtilizador() {
+        return this.idUtilizador;}
+    
     public void escreverDB() {
         RestauranteServer.reservasList.add(this);
 
@@ -51,24 +56,28 @@ public class Reserva {
     }
 
     public void removerDB() throws Exception {
-		File tempFile = new File("myTempFile.txt");
+		File tempFile = new File("database","myTempFile.txt");
 	
 		BufferedReader reader = new BufferedReader(new FileReader(RestauranteServer.reservasDB));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
+        
         String currentLine;
         // Percorrer o ficheiro e ver  se corresponde ao utilizador e aos dados(dia,horario)
         while ((currentLine = reader.readLine()) != null) {
           String[] current = currentLine.split(" : ");
-          if (current[0] == this.data && Horario.convertToHorario(current[1]) == this.horario
-              && Integer.parseInt(current[2]) == this.nrPessoas 
-              && Integer.parseInt(current[3]) == this.idMesa) {
+
+          if ( current[0].equals(this.getData()) &&
+            current[1].equals(this.getHorario().toString()) && 
+            Integer.parseInt(current[2]) == getNrPessoas() && 
+            Integer.parseInt(current[3]) == mesaAlocada() && 
+            Integer.parseInt(current[4]) == getIdUtilizador()){
                 RestauranteServer.reservasList.remove(this);
                 continue;
             }
+            
             writer.write(currentLine + System.getProperty("line.separator"));
         }
-        
         tempFile.renameTo(RestauranteServer.reservasDB);
         RestauranteServer.reservasDB = tempFile;
         reader.close();
@@ -116,7 +125,7 @@ public class Reserva {
             String data = scanner.nextLine();
             String[] dataStrings = data.split(" : ");
             Horario horario = Horario.convertToHorario(dataStrings[1]);        
-            reservasList.add(new Reserva(dataStrings[0], horario, Integer.parseInt(dataStrings[2]), Integer.parseInt(dataStrings[3])));
+            reservasList.add(new Reserva(dataStrings[0], horario, Integer.parseInt(dataStrings[2]), Integer.parseInt(dataStrings[3]),Integer.parseInt(dataStrings[4])));
         }
 
         scanner.close();
@@ -125,6 +134,6 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return data + " : " + horario.toString() + " : " + nrPessoas + " : " + idMesa;
+        return data + " : " + horario.toString() + " : " + nrPessoas + " : " + idMesa + " : " + idUtilizador;
     }
 }
